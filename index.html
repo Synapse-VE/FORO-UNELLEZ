@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Foro UNELLEZ — Comunidad de discusión</title>
+  <meta name="description" content="Preguntas, avisos y conversaciones de los núcleos Barinas, Guanare y San Carlos de la UNELLEZ. Un foro de la comunidad universitaria, en orden cronológico.">
+  <meta name="theme-color" content="#EE7D16">
+  <meta property="og:title" content="Foro UNELLEZ — Comunidad de discusión">
+  <meta property="og:description" content="Preguntas, avisos y conversaciones de la comunidad UNELLEZ.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/logo/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tailwind.css">
+  <link rel="stylesheet" href="assets/css/foro.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- ============================================================
+       HEADER — al portar a PHP: includes/header.php
+       ============================================================ -->
+  <div class="top-rule" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="shell mx-auto w-full header-inner flex items-center">
+      <a class="brand" href="index.html" aria-label="Foro UNELLEZ, ir al inicio">
+        <img class="brand-mark" src="assets/logo/logo-mark.png" alt="" width="30" height="32">
+        <span class="brand-text">
+          <span class="brand-name">Foro <b>UNELLEZ</b></span>
+          <span class="brand-sub">Comunidad de discusión</span>
+        </span>
+      </a>
+
+      <nav class="header-nav" aria-label="Navegación principal">
+        <a class="is-active" href="index.html" aria-current="page">Hilos</a>
+        <a href="index.html#comunidades">Comunidades</a>
+        <a href="index.html#reglas">Normas</a>
+        <a href="nuevo-hilo.html">Publicar</a>
+      </nav>
+
+      <form class="header-search" role="search" action="buscar.php" method="get">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="8.6" cy="8.6" r="5.1"/><path d="m12.4 12.4 4.4 4.4"/></svg>
+        <label class="sr-only" for="buscar">Buscar en el foro</label>
+        <input id="buscar" name="q" type="search" placeholder="Buscar hilos, comunidades, personas…" autocomplete="off" enterkeyhint="search">
+        <kbd aria-hidden="true">/</kbd>
+      </form>
+
+      <div class="header-actions flex items-center">
+        <a class="btn btn-primary btn-new" href="nuevo-hilo.html">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M8 2.5v11M2.5 8h11"/></svg>
+          <span>Nuevo hilo</span>
+        </a>
+
+        <div class="user-menu" data-user-menu>
+          <button class="user-trigger" type="button" data-user-trigger aria-expanded="false" aria-controls="menu-usuario">
+            <img class="avatar" src="assets/img/avatares/w33.jpg" alt="" width="28" height="28">
+            <span class="user-name">María</span>
+            <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m3 4.5 3 3 3-3"/></svg>
+            <span class="sr-only">Abrir menú de cuenta</span>
+          </button>
+          <div class="user-panel" id="menu-usuario" hidden>
+            <div class="user-panel-head">
+              <img src="assets/img/avatares/w33.jpg" alt="" width="34" height="34">
+              <div>
+                <strong>María Fernanda Rondón</strong>
+                <span>@mf.rondon · karma 1.284</span>
+              </div>
+            </div>
+            <div class="user-panel-links">
+              <a href="profile.html">Mi perfil <span>↗</span></a>
+              <a href="profile.html#hilos">Mis hilos <span>37</span></a>
+              <a href="profile.html#respuestas">Mis respuestas <span>111</span></a>
+              <a href="nuevo-hilo.html">Nuevo hilo <span>+</span></a>
+            </div>
+            <div class="user-panel-out">
+              <form action="procesar.php" method="post" data-demo>
+                <input type="hidden" name="accion" value="cerrar_sesion">
+                <input type="hidden" name="csrf_token" value="demo-csrf-unellez">
+                <button type="submit">
+                  <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M6 3H3.5v10H6M10 5l3 3-3 3M13 8H6"/></svg>
+                  Cerrar sesión
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <button class="icon-btn sidebar-toggle" type="button" data-sidebar-open aria-controls="sidebar" aria-expanded="false" aria-label="Abrir comunidades y reglas">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="drawer-overlay" data-sidebar-overlay hidden></div>
+
+  <main id="contenido">
+    <div class="shell mx-auto w-full">
+      <!-- Introducción editorial de la home: información, no hero de marca -->
+      <section class="page-intro" aria-labelledby="titulo-foro">
+        <div>
+          <p class="eyebrow">Comunidad de discusión · UNELLEZ</p>
+          <h1 id="titulo-foro">Foro UNELLEZ</h1>
+          <p class="intro-copy">Preguntas, avisos y conversaciones de los núcleos Barinas, Guanare y San Carlos. Leer es libre; para publicar, votar o responder hace falta una cuenta. Todo se ordena por fecha, sin publicidad.</p>
+        </div>
+        <div class="intro-aside">
+          <img src="assets/logo/logo-mark.png" alt="Marca de la UNELLEZ" width="37" height="39">
+          <p>
+            <span class="aside-label">Sello institucional</span>
+            Universidad Nacional Experimental de los Llanos Occidentales “Ezequiel Zamora”. Núcleo Barinas, Venezuela.
+          </p>
+        </div>
+      </section>
+
+      <div class="intro-stats">
+        <div class="stat-list">
+          <span><b>1.284</b> hilos</span>
+          <span><b>8.412</b> mensajes</span>
+          <span><b>1.046</b> miembros</span>
+          <span class="stat-online"><span class="online-dot" aria-hidden="true"></span>23 leyendo ahora</span>
+        </div>
+        <p class="intro-updated">Miércoles 28 oct 2026 · 10:09 <span class="dot-sep">/</span> Núcleo Barinas</p>
+      </div>
+
+      <div class="page-grid grid">
+        <div class="page-main min-w-0">
+          <div class="feed-toolbar flex items-end justify-between">
+            <div class="feed-tabs" role="group" aria-label="Ordenar los hilos">
+              <button class="feed-tab is-active" type="button" data-sort="recent" aria-pressed="true">Recientes</button>
+              <button class="feed-tab" type="button" data-sort="active" aria-pressed="false">Activos</button>
+              <button class="feed-tab" type="button" data-sort="top" aria-pressed="false">Mejor valorados</button>
+            </div>
+            <p class="feed-meta"><span data-feed-count aria-live="polite">15 hilos</span> <span class="dot-sep">·</span> actualizado 10:09</p>
+          </div>
+
+          <div class="filter-state" data-filter-state hidden>
+            <span>Mostrando <b data-filter-name>Ingeniería</b></span>
+            <button type="button" data-clear-filter>Ver todos los hilos</button>
+          </div>
+
+          <div class="thread-list" id="lista-hilos">
+            <!-- 01 · Fijado -->
+            <article class="thread-row is-pinned is-new" data-thread data-votes="46" data-replies="12" data-created="2026-10-28T09:23:00-04:00" data-community="agronomia">
+              <div class="vote-rail js-vote-group" data-vote-key="hilo-1042" data-vote-base="46" aria-label="Votación del hilo">
+                <button class="vote-btn vote-up" type="button" data-vote="up" aria-label="Votar a favor" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 0 12 9H0z"/></svg></button>
+                <span class="vote-count" data-vote-count aria-live="polite">46</span>
+                <button class="vote-btn vote-down" type="button" data-vote="down" aria-label="Votar en contra" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 9 0 0h12z"/></svg></button>
+              </div>
+              <div class="thread-body">
+                <p class="thread-kicker"><span class="thread-flag">Fijado</span><span class="kicker-sep">/</span><a class="thread-community" href="index.html#comunidades">Agronomía</a><span class="kicker-sep">/</span><span>Núcleo Barinas</span></p>
+                <h2 class="thread-title"><a href="thread.html">Jornada de siembra en el Jardín Botánico: lo que se hizo, lo que falta y la próxima fecha</a></h2>
+                <p class="thread-meta">por <a href="profile.html">Marta Pérez</a> <span class="sep">·</span> <time datetime="2026-10-28T09:23:00-04:00">hace 46 min</time> <span class="sep">·</span> <span class="meta-num">12</span>&nbsp;respuestas <span class="sep">·</span> <span class="meta-num">512</span>&nbsp;vistas <span class="thread-tags">jardín botánico, voluntariado</span></p>
+              </div>
+              <div class="thread-thumb" aria-hidden="true"><img src="assets/img/foro/jardin-botanico.jpg" alt="" width="56" height="56" loading="lazy"></div>
+            </article>
+
+            <!-- 02 -->
+            <article class="thread-row is-new" data-thread data-votes="38" data-replies="19" data-created="2026-10-28T08:15:00-04:00" data-community="ingenieria">
+              <div class="vote-rail js-vote-group" data-vote-key="hilo-1041" data-vote-base="38" aria-label="Votación del hilo">
+                <button class="vote-btn vote-up" type="button" data-vote="up" aria-label="Votar a favor" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 0 12 9H0z"/></svg></button>
+                <span class="vote-count" data-vote-count aria-live="polite">38</span>
+                <button class="vote-btn vote-down" type="button" data-vote="down" aria-label="Votar en contra" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 9 0 0h12z"/></svg></button>
+              </div>
+              <div class="thread-body">
+                <p class="thread-kicker"><a class="thread-community" href="index.html#comunidades">Ingeniería</a><span class="kicker-sep">/</span><span>Núcleo Barinas</span></p>
+                <h2 class="thread-title"><a href="thread.html">El horario de laboratorios del núcleo Barinas cambió otra vez: esto es lo que dice la coordinación</a></h2>
+                <p class="thread-meta">por <a href="profile.html">Luis A. Mora</a> <span class="sep">·</span> <time datetime="2026-10-28T08:15:00-04:00">hace 2 h</time> <span class="sep">·</span> <span class="meta-num">19</span>&nbsp;respuestas <span class="sep">·</span> <span class="meta-num">684</span>&nbsp;vistas <span class="thread-tags">horarios, laboratorios</span></p>
+              </div>
+              <div class="thread-thumb" aria-hidden="true"><img src="assets/img/foro/aula.jpg" alt="" width="56" height="56" loading="lazy"></div>
+            </article>
+
+            <!-- 03 -->
+            <article class="thread-row" data-thread data-votes="23" data-replies="8" data-created="2026-10-28T07:10:00-04:00" data-community="ingenieria">
+              <div class="vote-rail js-vote-group" data-vote-key="hilo-1040" data-vote-base="23" aria-label="Votación del hilo">
+                <button class="vote-btn vote-up" type="button" data-vote="up" aria-label="Votar a favor" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 0 12 9H0z"/></svg></button>
+                <span class="vote-count" data-vote-count aria-live="polite">23</span>
+                <button class="vote-btn vote-down" type="button" data-vote="down" aria-label="Votar en contra" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 9 0 0h12z"/></svg></button>
+              </div>
+              <div class="thread-body">
+                <p class="thread-kicker"><a class="thread-community" href="index.html#comunidades">Ingeniería</a><span class="kicker-sep">/</span><span>Taller de Electrónica</span></p>
+                <h2 class="thread-title"><a href="thread.html">¿Dónde consigo repuestos para la fuente de soldadura del taller de Electrónica?</a></h2>
+                <p class="thread-meta">por <a href="profile.html">César Perdomo</a> <span class="sep">·</span> <time datetime="2026-10-28T07:10:00-04:00">hace 3 h</time> <span class="sep">·</span> <span class="meta-num">8</span>&nbsp;respuestas <span class="sep">·</span> <span class="meta-num">210</span>&nbsp;vistas <span class="thread-tags">electrónica, taller</span></p>
+              </div>
+              <div class="thread-thumb" aria-hidden="true"><img src="assets/img/foro/circuito.jpg" alt="" width="56" height="56" loading="lazy"></div>
+            </article>
+
+            <!-- 04 -->
+            <article class="thread-row" data-thread data-votes="71" data-replies="27" data-created="2026-10-28T06:20:00-04:00" data-community="posgrado">
+              <div class="vote-rail js-vote-group" data-vote-key="hilo-1039" data-vote-base="71" aria-label="Votación del hilo">
+                <button class="vote-btn vote-up" type="button" data-vote="up" aria-label="Votar a favor" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 0 12 9H0z"/></svg></button>
+                <span class="vote-count" data-vote-count aria-live="polite">71</span>
+                <button class="vote-btn vote-down" type="button" data-vote="down" aria-label="Votar en contra" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 9 0 0h12z"/></svg></button>
+              </div>
+              <div class="thread-body">
+                <p class="thread-kicker"><a class="thread-community" href="index.html#comunidades">Posgrado</a><span class="kicker-sep">/</span><span>Núcleo Barinas</span></p>
+                <h2 class="thread-title"><a href="thread.html">Cómo estructurar el marco metodológico cuando el tutor no responde</a></h2>
+                <p class="thread-meta">por <a href="profile.html">Daniela Ochoa</a> <span class="sep">·</span> <time datetime="2026-10-28T06:20:00-04:00">hace 4 h</time> <span class="sep">·</span> <span class="meta-num">27</span>&nbsp;respuestas <span class="sep">·</span> <span class="meta-num">940</span>&nbsp;vistas <span class="thread-tags">tesis, metodología</span></p>
+              </div>
+              <div class="thread-thumb" aria-hidden="true"><img src="assets/img/foro/biblioteca.jpg" alt="" width="56" height="56" loading="lazy"></div>
+            </article>
+
+            <!-- 05 -->
+            <article class="thread-row" data-thread data-votes="34" data-replies="14" data-created="2026-10-28T05:35:00-04:00" data-community="agronomia">
+              <div class="vote-rail js-vote-group" data-vote-key="hilo-1038" data-vote-base="34" aria-label="Votación del hilo">
+                <button class="vote-btn vote-up" type="button" data-vote="up" aria-label="Votar a favor" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 0 12 9H0z"/></svg></button>
+                <span class="vote-count" data-vote-count aria-live="polite">34</span>
+                <button class="vote-btn vote-down" type="button" data-vote="down" aria-label="Votar en contra" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 9 0 0h12z"/></svg></button>
+              </div>
+              <div class="thread-body">
+                <p class="thread-kicker"><a class="thread-community" href="index.html#comunidades">Agronomía</a><span class="kicker-sep">/</span><span>Núcleo Guanare</span></p>
+                <h2 class="thread-title"><a href="thread.html">Feria Agropecuaria en Guanare: fotos del primer día</a></h2>
+                <p class="thread-meta">por <a href="profile.html">José R. Colmenares</a> <span class="sep">·</span> <time datetime="2026-10-28T05:35:00-04:00">hace 5 h</time> <span class="sep">·</span> <span class="meta-num">14</span>&nbsp;respuestas <span class="sep">·</span> <span class="meta-num">470</span>&nbsp;vistas <span class="thread-tags">Guanare, feria</span></p>
+              </div>
+              <div class="thread-thumb" aria-hidden="true"><img src="assets/img/foro/campo-practica.jpg" alt="" width="56" height="56" loading="lazy"></div>
+            </article>
+
+            <!-- 06 -->
+            <article class="thread-row" data-thread data-votes="52" data-replies="44" data-created="2026-10-28T04:50:00-04:00" data-community="campus">
+              <div class="vote-rail js-vote-group" data-vote-key="hilo-1037" data-vote-base="52" aria-label="Votación del hilo">
+                <button class="vote-btn vote-up" type="button" data-vote="up" aria-label="Votar a favor" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 0 12 9H0z"/></svg></button>
+                <span class="vote-count" data-vote-count aria-live="polite">52</span>
+                <button class="vote-btn vote-down" type="button" data-vote="down" aria-label="Votar en contra" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 9 0 0h12z"/></svg></button>
+              </div>
+              <div class="thread-body">
+                <p class="thread-kicker"><a class="thread-community" href="index.html#comunidades">Vida en el campus</a><span class="kicker-sep">/</span><span>Núcleo Barinas</span></p>
+                <h2 class="thread-title"><a href="thread.html">Se robaron dos bicicletas en el estacionamiento de Ingeniería</a></h2>
+                <p class="thread-meta">por <a href="profile.html">Andrés Salcedo</a> <span class="sep">·</span> <time datetime="2026-10-28T04:50:00-04:00">hace 6 h</time> <span class="sep">·</span> <span class="meta-num">44</span>&nbsp;respuestas <span class="sep">·</span> <span class="meta-num">1.248</span>&nbsp;vistas <span class="thread-tags">seguridad, estacionamiento</span></p>
+              </div>
+              <div class="thread-thumb" aria-hidden="true"><img src="assets/img/foro/bicicleta.jpg" alt="" width="56" height="56" loading="lazy"></div>
+            </article>
+
+            <!-- 07 -->
+            <article class="thread-row" data-thread data-votes="18" data-replies="6" data-created="2026-10-28T03:30:00-04:00" data-community="proyectos">
+              <div class="vote-rail js-vote-group" data-vote-key="hilo-1036" data-vote-base="18" aria-label="Votación del hilo">
+                <button class="vote-btn vote-up" type="button" data-vote="up" aria-label="Votar a favor" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 0 12 9H0z"/></svg></button>
+                <span class="vote-count" data-vote-count aria-live="polite">18</span>
+                <button class="vote-btn vote-down" type="button" data-vote="down" aria-label="Votar en contra" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 9 0 0h12z"/></svg></button>
+              </div>
+              <div class="thread-body">
+                <p class="thread-kicker"><a class="thread-community" href="index.html#comunidades">Proyectos</a><span class="kicker-sep">/</span><span>Núcleo Barinas</span></p>
+                <h2 class="thread-title"><a href="thread.html">Buscamos dos personas para el equipo de robótica (competencia nacional, noviembre)</a></h2>
+                <p class="thread-meta">por <a href="profile.html">Gabriela Rangel</a> <span class="sep">·</span> <time datetime="2026-10-28T03:30:00-04:00">hace 7 h</time> <span class="sep">·</span> <span class="meta-num">6</span>&nbsp;respuestas <span class="sep">·</span> <span class="meta-num">320</span>&nbsp;vistas <span class="thread-tags">robótica, convocatoria</span></p>
+              </div>
+              <div class="thread-thumb" aria-hidden="true"><img src="assets/img/foro/robotica.jpg" alt="" width="56" height="56" loading="lazy"></div>
+            </article>
+
+            <!-- 08 -->
+            <article class="thread-row" data-thread data-votes="9" data-replies="17" data-created="2026-10-28T02:15:00-04:00" data-community="academico">
+              <div class="vote-rail js-vote-group" data-vote-key="hilo-1035" data-vote-base="9" aria-label="Votación del hilo">
+                <button class="vote-btn vote-up" type="button" data-vote="up" aria-label="Votar a favor" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 0 12 9H0z"/></svg></button>
+                <span class="vote-count" data-vote-count aria-live="polite">9</span>
+                <button class="vote-btn vote-down" type="button" data-vote="down" aria-label="Votar en contra" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 9 0 0h12z"/></svg></button>
+              </div>
+              <div class="thread-body">
+                <p class="thread-kicker"><a class="thread-community" href="index.html#comunidades">Académico</a><span class="kicker-sep">/</span><span>Ingeniería de Sistemas</span></p>
+                <h2 class="thread-title"><a href="thread.html">¿Alguien ha cursado Proyecto Socio-Tecnológico con la prof. Rangel?</a></h2>
+                <p class="thread-meta">por <a href="profile.html">María Fernanda Rondón</a> <span class="sep">·</span> <time datetime="2026-10-28T02:15:00-04:00">hace 8 h</time> <span class="sep">·</span> <span class="meta-num">17</span>&nbsp;respuestas <span class="sep">·</span> <span class="meta-num">388</span>&nbsp;vistas <span class="thread-tags">materias, sistemas</span></p>
+              </div>
+            </article>
+
+            <!-- 09 -->
+            <article class="thread-row" data-thread data-votes="96" data-replies="31" data-created="2026-10-27T16:40:00-04:00" data-community="tramites">
+              <div class="vote-rail js-vote-group" data-vote-key="hilo-1034" data-vote-base="96" aria-label="Votación del hilo">
+                <button class="vote-btn vote-up" type="button" data-vote="up" aria-label="Votar a favor" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 0 12 9H0z"/></svg></button>
+                <span class="vote-count" data-vote-count aria-live="polite">96</span>
+                <button class="vote-btn vote-down" type="button" data-vote="down" aria-label="Votar en contra" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 9 0 0h12z"/></svg></button>
+              </div>
+              <div class="thread-body">
+                <p class="thread-kicker"><span class="thread-flag flag-guide">Guía</span><span class="kicker-sep">/</span><a class="thread-community" href="index.html#comunidades">Trámites</a><span class="kicker-sep">/</span><span>Núcleo Barinas</span></p>
+                <h2 class="thread-title"><a href="thread.html">Guía: cómo pedir la constancia de estudios sin hacer tres colas</a></h2>
+                <p class="thread-meta">por <a href="profile.html">Elena Uzcátegui</a> <span class="sep">·</span> <time datetime="2026-10-27T16:40:00-04:00">ayer, 16:40</time> <span class="sep">·</span> <span class="meta-num">31</span>&nbsp;respuestas <span class="sep">·</span> <span class="meta-num">2.140</span>&nbsp;vistas <span class="thread-tags">control de estudios, guía</span></p>
+              </div>
+              <div class="thread-thumb" aria-hidden="true"><img src="assets/img/foro/graduacion.jpg" alt="" width="56" height="56" loading="lazy"></div>
+            </article>
+
+            <!-- 10 -->
+            <article class="thread-row" data-thread data-votes="27" data-replies="33" data-created="2026-10-27T11:05:00-04:00" data-community="campus">
+              <div class="vote-rail js-vote-group" data-vote-key="hilo-1033" data-vote-base="27" aria-label="Votación del hilo">
+                <button class="vote-btn vote-up" type="button" data-vote="up" aria-label="Votar a favor" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 0 12 9H0z"/></svg></button>
+                <span class="vote-count" data-vote-count aria-live="polite">27</span>
+                <button class="vote-btn vote-down" type="button" data-vote="down" aria-label="Votar en contra" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 9 0 0h12z"/></svg></button>
+              </div>
+              <div class="thread-body">
+                <p class="thread-kicker"><a class="thread-community" href="index.html#comunidades">Vida en el campus</a><span class="kicker-sep">/</span><span>Núcleo Barinas</span></p>
+                <h2 class="thread-title"><a href="thread.html">El wifi del edificio de Ciencias Sociales, otra vez</a></h2>
+                <p class="thread-meta">por <a href="profile.html">Reinaldo Silva</a> <span class="sep">·</span> <time datetime="2026-10-27T11:05:00-04:00">ayer, 11:05</time> <span class="sep">·</span> <span class="meta-num">33</span>&nbsp;respuestas <span class="sep">·</span> <span class="meta-num">760</span>&nbsp;vistas <span class="thread-tags">wifi, sociales</span></p>
+              </div>
+            </article>
+
+            <!-- 11 -->
+            <article class="thread-row" data-thread data-votes="64" data-replies="12" data-created="2026-10-26T18:20:00-04:00" data-community="recursos">
+              <div class="vote-rail js-vote-group" data-vote-key="hilo-1032" data-vote-base="64" aria-label="Votación del hilo">
+                <button class="vote-btn vote-up" type="button" data-vote="up" aria-label="Votar a favor" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 0 12 9H0z"/></svg></button>
+                <span class="vote-count" data-vote-count aria-live="polite">64</span>
+                <button class="vote-btn vote-down" type="button" data-vote="down" aria-label="Votar en contra" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 9 0 0h12z"/></svg></button>
+              </div>
+              <div class="thread-body">
+                <p class="thread-kicker"><a class="thread-community" href="index.html#comunidades">Recursos</a><span class="kicker-sep">/</span><span>Núcleo Barinas</span></p>
+                <h2 class="thread-title"><a href="thread.html">Plantilla de LaTeX para el informe de pasantías (y cómo usarla)</a></h2>
+                <p class="thread-meta">por <a href="profile.html">Luis A. Mora</a> <span class="sep">·</span> <time datetime="2026-10-26T18:20:00-04:00">26 oct</time> <span class="sep">·</span> <span class="meta-num">12</span>&nbsp;respuestas <span class="sep">·</span> <span class="meta-num">1.412</span>&nbsp;vistas <span class="thread-tags">LaTeX, pasantías</span></p>
+              </div>
+              <div class="thread-thumb" aria-hidden="true"><img src="assets/img/foro/laptop.jpg" alt="" width="56" height="56" loading="lazy"></div>
+            </article>
+
+            <!-- 12 -->
+            <article class="thread-row" data-thread data-votes="15" data-replies="21" data-created="2026-10-26T09:45:00-04:00" data-community="deportes">
+              <div class="vote-rail js-vote-group" data-vote-key="hilo-1031" data-vote-base="15" aria-label="Votación del hilo">
+                <button class="vote-btn vote-up" type="button" data-vote="up" aria-label="Votar a favor" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 0 12 9H0z"/></svg></button>
+                <span class="vote-count" data-vote-count aria-live="polite">15</span>
+                <button class="vote-btn vote-down" type="button" data-vote="down" aria-label="Votar en contra" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 9 0 0h12z"/></svg></button>
+              </div>
+              <div class="thread-body">
+                <p class="thread-kicker"><a class="thread-community" href="index.html#comunidades">Deportes</a><span class="kicker-sep">/</span><span>Núcleo Barinas</span></p>
+                <h2 class="thread-title"><a href="thread.html">¿Se arma el equipo de Ingeniería para el inter-núcleos?</a></h2>
+                <p class="thread-meta">por <a href="profile.html">Andrés Salcedo</a> <span class="sep">·</span> <time datetime="2026-10-26T09:45:00-04:00">26 oct</time> <span class="sep">·</span> <span class="meta-num">21</span>&nbsp;respuestas <span class="sep">·</span> <span class="meta-num">402</span>&nbsp;vistas <span class="thread-tags">fútbol, inter-núcleos</span></p>
+              </div>
+              <div class="thread-thumb" aria-hidden="true"><img src="assets/img/foro/futbol.jpg" alt="" width="56" height="56" loading="lazy"></div>
+            </article>
+
+            <!-- 13 -->
+            <article class="thread-row" data-thread data-votes="41" data-replies="9" data-created="2026-10-25T14:10:00-04:00" data-community="empleo">
+              <div class="vote-rail js-vote-group" data-vote-key="hilo-1030" data-vote-base="41" aria-label="Votación del hilo">
+                <button class="vote-btn vote-up" type="button" data-vote="up" aria-label="Votar a favor" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 0 12 9H0z"/></svg></button>
+                <span class="vote-count" data-vote-count aria-live="polite">41</span>
+                <button class="vote-btn vote-down" type="button" data-vote="down" aria-label="Votar en contra" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 9 0 0h12z"/></svg></button>
+              </div>
+              <div class="thread-body">
+                <p class="thread-kicker"><a class="thread-community" href="index.html#comunidades">Empleo y pasantías</a><span class="kicker-sep">/</span><span>Núcleo Guanare</span></p>
+                <h2 class="thread-title"><a href="thread.html">Pasantías en el INIA: lo que nadie te cuenta antes de postular</a></h2>
+                <p class="thread-meta">por <a href="profile.html">Gabriela Rangel</a> <span class="sep">·</span> <time datetime="2026-10-25T14:10:00-04:00">25 oct</time> <span class="sep">·</span> <span class="meta-num">9</span>&nbsp;respuestas <span class="sep">·</span> <span class="meta-num">890</span>&nbsp;vistas <span class="thread-tags">pasantías, INIA</span></p>
+              </div>
+            </article>
+
+            <!-- 14 -->
+            <article class="thread-row" data-thread data-votes="19" data-replies="25" data-created="2026-10-24T17:30:00-04:00" data-community="academico">
+              <div class="vote-rail js-vote-group" data-vote-key="hilo-1029" data-vote-base="19" aria-label="Votación del hilo">
+                <button class="vote-btn vote-up" type="button" data-vote="up" aria-label="Votar a favor" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 0 12 9H0z"/></svg></button>
+                <span class="vote-count" data-vote-count aria-live="polite">19</span>
+                <button class="vote-btn vote-down" type="button" data-vote="down" aria-label="Votar en contra" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 9 0 0h12z"/></svg></button>
+              </div>
+              <div class="thread-body">
+                <p class="thread-kicker"><a class="thread-community" href="index.html#comunidades">Académico</a><span class="kicker-sep">/</span><span>Núcleo Barinas</span></p>
+                <h2 class="thread-title"><a href="thread.html">Cambio de carrera: experiencias de quienes lo hicieron en 3er semestre</a></h2>
+                <p class="thread-meta">por <a href="profile.html">Daniela Ochoa</a> <span class="sep">·</span> <time datetime="2026-10-24T17:30:00-04:00">24 oct</time> <span class="sep">·</span> <span class="meta-num">25</span>&nbsp;respuestas <span class="sep">·</span> <span class="meta-num">506</span>&nbsp;vistas <span class="thread-tags">cambio de carrera</span></p>
+              </div>
+            </article>
+
+            <!-- 15 -->
+            <article class="thread-row" data-thread data-votes="7" data-replies="3" data-created="2026-10-23T12:00:00-04:00" data-community="compraventa">
+              <div class="vote-rail js-vote-group" data-vote-key="hilo-1028" data-vote-base="7" aria-label="Votación del hilo">
+                <button class="vote-btn vote-up" type="button" data-vote="up" aria-label="Votar a favor" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 0 12 9H0z"/></svg></button>
+                <span class="vote-count" data-vote-count aria-live="polite">7</span>
+                <button class="vote-btn vote-down" type="button" data-vote="down" aria-label="Votar en contra" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 9 0 0h12z"/></svg></button>
+              </div>
+              <div class="thread-body">
+                <p class="thread-kicker"><a class="thread-community" href="index.html#comunidades">Compra y venta</a><span class="kicker-sep">/</span><span>Núcleo Barinas</span></p>
+                <h2 class="thread-title"><a href="thread.html">Vendo calculadora Casio fx-991 y dos libros de Cálculo I</a></h2>
+                <p class="thread-meta">por <a href="profile.html">César Perdomo</a> <span class="sep">·</span> <time datetime="2026-10-23T12:00:00-04:00">23 oct</time> <span class="sep">·</span> <span class="meta-num">3</span>&nbsp;respuestas <span class="sep">·</span> <span class="meta-num">240</span>&nbsp;vistas <span class="thread-tags">venta, Cálculo I</span></p>
+              </div>
+            </article>
+
+            <!-- 16-18 · se revelan con "Cargar más hilos" -->
+            <article class="thread-row" data-thread data-extra hidden data-votes="11" data-replies="5" data-created="2026-10-22T15:20:00-04:00" data-community="tramites">
+              <div class="vote-rail js-vote-group" data-vote-key="hilo-1027" data-vote-base="11" aria-label="Votación del hilo">
+                <button class="vote-btn vote-up" type="button" data-vote="up" aria-label="Votar a favor" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 0 12 9H0z"/></svg></button>
+                <span class="vote-count" data-vote-count aria-live="polite">11</span>
+                <button class="vote-btn vote-down" type="button" data-vote="down" aria-label="Votar en contra" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 9 0 0h12z"/></svg></button>
+              </div>
+              <div class="thread-body">
+                <p class="thread-kicker"><a class="thread-community" href="index.html#comunidades">Trámites</a><span class="kicker-sep">/</span><span>Núcleo Barinas</span></p>
+                <h2 class="thread-title"><a href="thread.html">¿Dónde está el reglamento de pasantías actualizado?</a></h2>
+                <p class="thread-meta">por <a href="profile.html">Ana Lucía Pérez</a> <span class="sep">·</span> <time datetime="2026-10-22T15:20:00-04:00">22 oct</time> <span class="sep">·</span> <span class="meta-num">5</span>&nbsp;respuestas <span class="sep">·</span> <span class="meta-num">180</span>&nbsp;vistas <span class="thread-tags">pasantías, reglamento</span></p>
+              </div>
+            </article>
+
+            <article class="thread-row" data-thread data-extra hidden data-votes="13" data-replies="7" data-created="2026-10-22T09:10:00-04:00" data-community="academico">
+              <div class="vote-rail js-vote-group" data-vote-key="hilo-1026" data-vote-base="13" aria-label="Votación del hilo">
+                <button class="vote-btn vote-up" type="button" data-vote="up" aria-label="Votar a favor" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 0 12 9H0z"/></svg></button>
+                <span class="vote-count" data-vote-count aria-live="polite">13</span>
+                <button class="vote-btn vote-down" type="button" data-vote="down" aria-label="Votar en contra" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 9 0 0h12z"/></svg></button>
+              </div>
+              <div class="thread-body">
+                <p class="thread-kicker"><a class="thread-community" href="index.html#comunidades">Académico</a><span class="kicker-sep">/</span><span>Núcleo Barinas</span></p>
+                <h2 class="thread-title"><a href="thread.html">Grupo de estudio para Cálculo III (martes y jueves)</a></h2>
+                <p class="thread-meta">por <a href="profile.html">Pedro Salas</a> <span class="sep">·</span> <time datetime="2026-10-22T09:10:00-04:00">22 oct</time> <span class="sep">·</span> <span class="meta-num">7</span>&nbsp;respuestas <span class="sep">·</span> <span class="meta-num">260</span>&nbsp;vistas <span class="thread-tags">Cálculo III, grupo de estudio</span></p>
+              </div>
+            </article>
+
+            <article class="thread-row" data-thread data-extra hidden data-votes="20" data-replies="10" data-created="2026-10-21T17:00:00-04:00" data-community="agronomia">
+              <div class="vote-rail js-vote-group" data-vote-key="hilo-1025" data-vote-base="20" aria-label="Votación del hilo">
+                <button class="vote-btn vote-up" type="button" data-vote="up" aria-label="Votar a favor" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 0 12 9H0z"/></svg></button>
+                <span class="vote-count" data-vote-count aria-live="polite">20</span>
+                <button class="vote-btn vote-down" type="button" data-vote="down" aria-label="Votar en contra" aria-pressed="false"><svg viewBox="0 0 12 9" aria-hidden="true"><path d="M6 9 0 0h12z"/></svg></button>
+              </div>
+              <div class="thread-body">
+                <p class="thread-kicker"><a class="thread-community" href="index.html#comunidades">Agronomía</a><span class="kicker-sep">/</span><span>Núcleo Barinas</span></p>
+                <h2 class="thread-title"><a href="thread.html">Se busca gente para el huerto comunitario de Agronomía</a></h2>
+                <p class="thread-meta">por <a href="profile.html">Marta Pérez</a> <span class="sep">·</span> <time datetime="2026-10-21T17:00:00-04:00">21 oct</time> <span class="sep">·</span> <span class="meta-num">10</span>&nbsp;respuestas <span class="sep">·</span> <span class="meta-num">300</span>&nbsp;vistas <span class="thread-tags">huerto, voluntariado</span></p>
+              </div>
+              <div class="thread-thumb" aria-hidden="true"><img src="assets/img/foro/jardin-botanico.jpg" alt="" width="56" height="56" loading="lazy"></div>
+            </article>
+          </div>
+
+          <div class="feed-foot flex items-center justify-between">
+            <button class="btn btn-outline btn-sm" type="button" data-load-more>Cargar más hilos</button>
+            <p data-feed-status>Mostrando 15 de 1.284 hilos · orden cronológico</p>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SIDEBAR — al portar a PHP: includes/sidebar-home.php
+             ============================================================ -->
+        <aside class="page-side" id="sidebar" aria-label="Información de la comunidad">
+          <div class="sidebar-head">
+            <span>Comunidad</span>
+            <button class="sidebar-close" type="button" data-sidebar-close>Cerrar <span aria-hidden="true">×</span></button>
+          </div>
+
+          <section class="side-block" id="comunidades">
+            <div class="side-head">
+              <h2>Comunidades</h2>
+              <a href="index.html#lista-hilos" data-clear-filter>Todos los hilos</a>
+            </div>
+            <ul class="community-list">
+              <li><a href="index.html#lista-hilos" data-community-filter="ingenieria"><span class="cmono" aria-hidden="true">IN</span><span>Ingeniería</span><span class="ccount">248</span></a></li>
+              <li><a href="index.html#lista-hilos" data-community-filter="agronomia"><span class="cmono" aria-hidden="true">AG</span><span>Agronomía</span><span class="ccount">176</span></a></li>
+              <li><a href="index.html#lista-hilos" data-community-filter="posgrado"><span class="cmono" aria-hidden="true">PG</span><span>Posgrado</span><span class="ccount">154</span></a></li>
+              <li><a href="index.html#lista-hilos" data-community-filter="campus"><span class="cmono" aria-hidden="true">VC</span><span>Vida en el campus</span><span class="ccount">141</span></a></li>
+              <li><a href="index.html#lista-hilos" data-community-filter="academico"><span class="cmono" aria-hidden="true">AC</span><span>Académico</span><span class="ccount">121</span></a></li>
+              <li><a href="index.html#lista-hilos" data-community-filter="proyectos"><span class="cmono" aria-hidden="true">PR</span><span>Proyectos</span><span class="ccount">87</span></a></li>
+              <li><a href="index.html#lista-hilos" data-community-filter="tramites"><span class="cmono" aria-hidden="true">TR</span><span>Trámites</span><span class="ccount">64</span></a></li>
+              <li><a href="index.html#lista-hilos" data-community-filter="deportes"><span class="cmono" aria-hidden="true">DE</span><span>Deportes</span><span class="ccount">52</span></a></li>
+            </ul>
+            <p class="side-note">12 comunidades activas en los tres núcleos. Algunas solo se ven con sesión iniciada.</p>
+          </section>
+
+          <section class="side-block" id="reglas">
+            <div class="side-head">
+              <h2>Reglas del foro</h2>
+            </div>
+            <ol class="rules-list">
+              <li><span class="rule-num">01</span><span>Lee antes de preguntar. Si el tema ya está abierto, responde ahí.</span></li>
+              <li><span class="rule-num">02</span><span>Un tema por hilo. El título describe el problema, no tu urgencia.</span></li>
+              <li><span class="rule-num">03</span><span>Identifica curso, núcleo y a quién le preguntaste. Sin datos personales.</span></li>
+              <li><span class="rule-num">04</span><span>No se publican ventas, política partidista ni capturas privadas.</span></li>
+              <li><span class="rule-num">05</span><span>Reporta, no respondas al ataque. La moderación decide en 24 h.</span></li>
+            </ol>
+            <p class="side-note">Al publicar aceptas las normas y la política de datos de la comunidad.</p>
+          </section>
+
+          <section class="side-block">
+            <div class="side-head">
+              <h2>Moderación</h2>
+              <a href="mailto:moderacion@unellez.edu.ve">Contactar</a>
+            </div>
+            <ul class="mod-list">
+              <li>
+                <img src="assets/img/avatares/m54.jpg" alt="" width="22" height="22" loading="lazy">
+                <div><b>Reinaldo Silva</b><small>Moderador general · desde 2023</small></div>
+              </li>
+              <li>
+                <img src="assets/img/avatares/w33.jpg" alt="" width="22" height="22" loading="lazy">
+                <div><b>María F. Rondón</b><small>Académico y Proyectos</small></div>
+              </li>
+              <li>
+                <img src="assets/img/avatares/w65.jpg" alt="" width="22" height="22" loading="lazy">
+                <div><b>Elena Uzcátegui</b><small>Agronomía y Posgrado</small></div>
+              </li>
+            </ul>
+          </section>
+
+          <div class="side-seal">
+            <img src="assets/logo/logo-mark.png" alt="Marca UNELLEZ" width="27" height="29">
+            <p><span class="seal-label">Sello institucional</span>Universidad Nacional Experimental de los Llanos Occidentales “Ezequiel Zamora”.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- ============================================================
+       FOOTER — al portar a PHP: includes/footer.php
+       ============================================================ -->
+  <footer class="site-footer">
+    <div class="shell footer-seal">
+      <img class="footer-logo" src="assets/logo/logo.png" alt="UNELLEZ" width="66" height="86">
+      <div>
+        <p class="footer-kicker">Sello institucional · UNELLEZ</p>
+        <p class="footer-credit">Desarrollado por ingenieros de la <strong>Universidad Nacional Experimental de los Llanos Occidentales “Ezequiel Zamora”</strong> (UNELLEZ).</p>
+      </div>
+      <a class="footer-link-out" href="https://unellez.edu.ve/" target="_blank" rel="noopener">
+        unellez.edu.ve
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M4 2h6v6M10 2 3 9"/></svg>
+      </a>
+    </div>
+
+    <div class="shell footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <img class="brand-mark" src="assets/logo/logo-mark.png" alt="" width="26" height="28">
+          <span class="brand-text">
+            <span class="brand-name">Foro <b>UNELLEZ</b></span>
+            <span class="brand-sub">Comunidad de discusión</span>
+          </span>
+        </a>
+        <p>Un espacio para preguntar, avisar y discutir entre estudiantes, docentes y egresados de los núcleos Barinas, Guanare y San Carlos.</p>
+        <p class="footer-note">Prototipo frontend · datos de demostración<br><a href="CREDITOS.md">Créditos de imágenes</a></p>
+      </div>
+      <div class="footer-col">
+        <h2>Comunidades</h2>
+        <a href="index.html#lista-hilos">Ingeniería</a>
+        <a href="index.html#lista-hilos">Agronomía</a>
+        <a href="index.html#lista-hilos">Académico</a>
+        <a href="index.html#lista-hilos">Vida en el campus</a>
+      </div>
+      <div class="footer-col">
+        <h2>El foro</h2>
+        <a href="index.html">Hilos recientes</a>
+        <a href="index.html#comunidades">Comunidades</a>
+        <a href="index.html#reglas">Normas</a>
+        <a href="nuevo-hilo.html">Publicar</a>
+      </div>
+      <div class="footer-col">
+        <h2>Núcleos</h2>
+        <span>Barinas</span>
+        <span>Guanare</span>
+        <span>San Carlos</span>
+        <a href="login.html">Cómo participar</a>
+      </div>
+    </div>
+
+    <div class="shell footer-base">
+      <p>© 2026 Foro UNELLEZ. Contenido de la comunidad universitaria.</p>
+      <div class="footer-base-links">
+        <a href="index.html#reglas">Normas</a>
+        <a href="login.html">Acceso</a>
+        <a href="mailto:moderacion@unellez.edu.ve">Contacto</a>
+      </div>
+      <p>Hecho en Barinas, Venezuela.</p>
+    </div>
+  </footer>
+
+  <div class="toast" data-toast role="status" aria-live="polite"></div>
+  <script src="assets/js/foro.js" defer></script>
+</body>
+</html>

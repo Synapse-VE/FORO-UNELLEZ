@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entrar — Foro UNELLEZ</title>
+  <meta name="description" content="Acceso a la comunidad de discusión de la UNELLEZ. Entra con tu cuenta o crea una cuenta institucional.">
+  <meta name="theme-color" content="#EE7D16">
+  <link rel="icon" href="assets/logo/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tailwind.css">
+  <link rel="stylesheet" href="assets/css/foro.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div class="top-rule" aria-hidden="true"></div>
+
+  <header class="auth-header">
+    <div class="shell mx-auto w-full header-inner flex items-center">
+      <a class="brand" href="index.html" aria-label="Foro UNELLEZ, ir al inicio">
+        <img class="brand-mark" src="assets/logo/logo-mark.png" alt="" width="30" height="32">
+        <span class="brand-text">
+          <span class="brand-name">Foro <b>UNELLEZ</b></span>
+          <span class="brand-sub">Comunidad de discusión</span>
+        </span>
+      </a>
+      <div class="auth-header-right">
+        <span class="hide-sm">Lectura libre. Escritura con cuenta.</span>
+        <a href="index.html">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M6 2 2 6l4 4M2 6h8"/></svg>
+          Volver al foro
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <h1 class="sr-only">Acceso al Foro UNELLEZ</h1>
+    <div class="auth-main">
+      <section class="auth-visual">
+        <img src="assets/img/foro/sede-guanare.jpg" alt="Sede del Vicerrectorado de la UNELLEZ en Guanare, al atardecer" width="900" height="675">
+        <div class="auth-visual-caption">
+          <p class="visual-kicker">Núcleo Guanare · UNELLEZ</p>
+          <h2>Comunidad de discusión</h2>
+          <p>Estudiantes, docentes y egresados de los tres núcleos. Puedes leer todo sin cuenta; para publicar, votar o responder necesitas una.</p>
+          <p class="visual-credit">Foto: Vesparobelcar86 / Wikimedia Commons (CC BY-SA 3.0)</p>
+        </div>
+      </section>
+
+      <section class="auth-form-wrap">
+        <div class="auth-box">
+          <div class="auth-tabs" data-tabs role="tablist" aria-label="Entrar o crear cuenta">
+            <button class="auth-tab is-active" id="tab-entrar" type="button" role="tab" aria-selected="true" aria-controls="panel-entrar" data-tab="entrar" tabindex="0">Entrar</button>
+            <button class="auth-tab" id="tab-registro" type="button" role="tab" aria-selected="false" aria-controls="panel-registro" data-tab="registro" tabindex="-1">Crear cuenta</button>
+          </div>
+
+          <div class="auth-panel is-active" id="panel-entrar" role="tabpanel" aria-labelledby="tab-entrar">
+            <h2 class="auth-title">Entrar al foro</h2>
+            <p class="auth-sub">Usa el correo con el que te registraste. Si marcas «Recordarme», la sesión dura 30 días en este navegador.</p>
+
+            <!-- data-demo: quitar al conectar procesar.php -->
+            <form class="auth-form" action="procesar.php" method="post" data-validate="login" data-demo novalidate>
+              <input type="hidden" name="accion" value="login">
+              <input type="hidden" name="csrf_token" value="demo-csrf-unellez">
+              <input type="hidden" name="redirigir" value="index.php">
+
+              <div class="form-field">
+                <label class="form-label" for="login-email">Correo <span class="label-optional">institucional o personal</span></label>
+                <input class="input" id="login-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="nombre@unellez.edu.ve" aria-describedby="error-login-email">
+                <p class="field-error" id="error-login-email" data-error-for="email"></p>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="login-password">Contraseña</label>
+                <div class="password-wrap">
+                  <input class="input" id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Tu contraseña" aria-describedby="error-login-password">
+                  <button class="password-toggle" type="button" data-password-toggle aria-label="Mostrar contraseña" aria-pressed="false">
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2.5 10s2.7-4.2 7.5-4.2 7.5 4.2 7.5 4.2-2.7 4.2-7.5 4.2S2.5 10 2.5 10Z"/><circle cx="10" cy="10" r="2.2"/></svg>
+                  </button>
+                </div>
+                <p class="field-error" id="error-login-password" data-error-for="password"></p>
+              </div>
+
+              <div class="auth-row flex items-center justify-between">
+                <div class="checkbox-row">
+                  <input id="recordar" name="recordar" type="checkbox" value="1">
+                  <label for="recordar">Recordarme en este navegador</label>
+                </div>
+                <button class="linkish" type="button" data-demo-action="La recuperación de contraseña se conectará a procesar.php.">¿Olvidaste tu contraseña?</button>
+              </div>
+
+              <button class="btn btn-primary auth-submit" type="submit">Entrar</button>
+            </form>
+
+            <p class="auth-switch">¿No tienes cuenta? <button type="button" data-tab-target="registro">Crear una cuenta</button></p>
+          </div>
+
+          <div class="auth-panel" id="panel-registro" role="tabpanel" aria-labelledby="tab-registro" hidden>
+            <h2 class="auth-title">Crear cuenta</h2>
+            <p class="auth-sub">La cuenta es para la comunidad UNELLEZ. Usa tu nombre real; el correo no se muestra en el perfil. La revisión de cuentas nuevas se hace una vez al día.</p>
+
+            <form class="auth-form" action="procesar.php" method="post" data-validate="registro" data-demo novalidate>
+              <input type="hidden" name="accion" value="registro">
+              <input type="hidden" name="csrf_token" value="demo-csrf-unellez">
+              <div class="form-error-summary" data-error-summary role="alert"></div>
+
+              <div class="form-row grid">
+                <div class="form-field">
+                  <label class="form-label" for="registro-nombre">Nombre completo</label>
+                  <input class="input" id="registro-nombre" name="nombre" type="text" autocomplete="name" placeholder="María Fernanda Rondón" aria-describedby="error-nombre">
+                  <p class="field-error" id="error-nombre" data-error-for="nombre"></p>
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="registro-usuario">Usuario</label>
+                  <input class="input" id="registro-usuario" name="usuario" type="text" autocomplete="username" placeholder="mf.rondon" aria-describedby="error-usuario">
+                  <p class="field-error" id="error-usuario" data-error-for="usuario"></p>
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="registro-email">Correo <span class="label-optional">institucional o personal</span></label>
+                <input class="input" id="registro-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="nombre@unellez.edu.ve" aria-describedby="error-registro-email">
+                <p class="field-error" id="error-registro-email" data-error-for="email"></p>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="registro-carrera">Carrera o área</label>
+                <select class="select" id="registro-carrera" name="carrera" autocomplete="off" aria-describedby="error-carrera">
+                  <option value="">Elige una opción</option>
+                  <option value="sistemas">Ingeniería de Sistemas</option>
+                  <option value="civil">Ingeniería Civil</option>
+                  <option value="agronomia">Ingeniería Agronómica</option>
+                  <option value="veterinaria">Medicina Veterinaria</option>
+                  <option value="educacion">Educación Integral</option>
+                  <option value="contaduria">Contaduría Pública</option>
+                  <option value="administracion">Administración</option>
+                  <option value="posgrado">Posgrado</option>
+                  <option value="otra">Otra</option>
+                </select>
+                <p class="field-error" id="error-carrera" data-error-for="carrera"></p>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="registro-password">Contraseña</label>
+                <div class="password-wrap">
+                  <input class="input" id="registro-password" name="password" type="password" autocomplete="new-password" placeholder="Mínimo 8 caracteres" aria-describedby="error-registro-password pw-checks">
+                  <button class="password-toggle" type="button" data-password-toggle aria-label="Mostrar contraseña" aria-pressed="false">
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2.5 10s2.7-4.2 7.5-4.2 7.5 4.2 7.5 4.2-2.7 4.2-7.5 4.2S2.5 10 2.5 10Z"/><circle cx="10" cy="10" r="2.2"/></svg>
+                  </button>
+                </div>
+                <div class="pw-checks" id="pw-checks" data-pw-checks="#registro-password">
+                  <span data-check="length">8 caracteres como mínimo</span>
+                  <span data-check="number">Al menos un número</span>
+                  <span data-check="letter">Al menos una letra</span>
+                </div>
+                <p class="field-error" id="error-registro-password" data-error-for="password"></p>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="registro-password-confirm">Repetir contraseña</label>
+                <input class="input" id="registro-password-confirm" name="password_confirm" type="password" autocomplete="new-password" placeholder="Otra vez, sin copiar y pegar" aria-describedby="error-password_confirm">
+                <p class="field-error" id="error-password_confirm" data-error-for="password_confirm"></p>
+              </div>
+
+              <div class="checkbox-row checkbox-row--spaced">
+                <input id="registro-normas" name="acepta_normas" type="checkbox" value="1" aria-describedby="error-acepta_normas">
+                <label for="registro-normas">Acepto las <a href="index.html#reglas">normas de la comunidad</a> y la política de datos. No publicaré información personal de terceros.</label>
+              </div>
+              <p class="field-error checkbox-error" id="error-acepta_normas" data-error-for="acepta_normas"></p>
+
+              <button class="btn btn-primary auth-submit" type="submit">Crear cuenta</button>
+            </form>
+
+            <p class="auth-switch">¿Ya tienes cuenta? <button type="button" data-tab-target="entrar">Entrar</button></p>
+          </div>
+
+          <div class="auth-credit">
+            <img src="assets/logo/logo-mark.png" alt="Marca UNELLEZ" width="20" height="21">
+            <p>Desarrollado por ingenieros de la Universidad Nacional Experimental de los Llanos Occidentales “Ezequiel Zamora” <b>(UNELLEZ)</b>.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="toast" data-toast role="status" aria-live="polite"></div>
+  <script src="assets/js/foro.js" defer></script>
+</body>
+</html>

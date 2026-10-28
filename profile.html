@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>María Fernanda Rondón — Foro UNELLEZ</title>
+  <meta name="description" content="Perfil de María Fernanda Rondón, estudiante de Ingeniería de Sistemas y moderadora de Académico y Proyectos en el Foro UNELLEZ.">
+  <meta name="theme-color" content="#EE7D16">
+  <link rel="icon" href="assets/logo/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tailwind.css">
+  <link rel="stylesheet" href="assets/css/foro.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <div class="top-rule" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="shell mx-auto w-full header-inner flex items-center">
+      <a class="brand" href="index.html" aria-label="Foro UNELLEZ, ir al inicio">
+        <img class="brand-mark" src="assets/logo/logo-mark.png" alt="" width="30" height="32">
+        <span class="brand-text">
+          <span class="brand-name">Foro <b>UNELLEZ</b></span>
+          <span class="brand-sub">Comunidad de discusión</span>
+        </span>
+      </a>
+
+      <nav class="header-nav" aria-label="Navegación principal">
+        <a href="index.html">Hilos</a>
+        <a href="index.html#comunidades">Comunidades</a>
+        <a href="index.html#reglas">Normas</a>
+        <a href="nuevo-hilo.html">Publicar</a>
+      </nav>
+
+      <form class="header-search" role="search" action="buscar.php" method="get">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="8.6" cy="8.6" r="5.1"/><path d="m12.4 12.4 4.4 4.4"/></svg>
+        <label class="sr-only" for="buscar">Buscar en el foro</label>
+        <input id="buscar" name="q" type="search" placeholder="Buscar hilos, comunidades, personas…" autocomplete="off" enterkeyhint="search">
+        <kbd aria-hidden="true">/</kbd>
+      </form>
+
+      <div class="header-actions flex items-center">
+        <a class="btn btn-primary btn-new" href="nuevo-hilo.html">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M8 2.5v11M2.5 8h11"/></svg>
+          <span>Nuevo hilo</span>
+        </a>
+
+        <div class="user-menu" data-user-menu>
+          <button class="user-trigger" type="button" data-user-trigger aria-expanded="false" aria-controls="menu-usuario">
+            <img class="avatar" src="assets/img/avatares/w33.jpg" alt="" width="28" height="28">
+            <span class="user-name">María</span>
+            <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m3 4.5 3 3 3-3"/></svg>
+            <span class="sr-only">Abrir menú de cuenta</span>
+          </button>
+          <div class="user-panel" id="menu-usuario" hidden>
+            <div class="user-panel-head">
+              <img src="assets/img/avatares/w33.jpg" alt="" width="34" height="34">
+              <div>
+                <strong>María Fernanda Rondón</strong>
+                <span>@mf.rondon · karma 1.284</span>
+              </div>
+            </div>
+            <div class="user-panel-links">
+              <a href="profile.html">Mi perfil <span>↗</span></a>
+              <a href="profile.html#hilos">Mis hilos <span>37</span></a>
+              <a href="profile.html#respuestas">Mis respuestas <span>111</span></a>
+              <a href="nuevo-hilo.html">Nuevo hilo <span>+</span></a>
+            </div>
+            <div class="user-panel-out">
+              <form action="procesar.php" method="post" data-demo>
+                <input type="hidden" name="accion" value="cerrar_sesion">
+                <input type="hidden" name="csrf_token" value="demo-csrf-unellez">
+                <button type="submit">
+                  <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M6 3H3.5v10H6M10 5l3 3-3 3M13 8H6"/></svg>
+                  Cerrar sesión
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <button class="icon-btn sidebar-toggle" type="button" data-sidebar-open aria-controls="sidebar" aria-expanded="false" aria-label="Abrir información del perfil">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="drawer-overlay" data-sidebar-overlay hidden></div>
+
+  <main id="contenido">
+    <div class="shell mx-auto w-full">
+      <nav class="breadcrumb" aria-label="Migas de pan">
+        <a href="index.html">Inicio</a><span class="crumb-sep">/</span>
+        <a href="index.html#comunidades">Miembros</a><span class="crumb-sep">/</span>
+        <span aria-current="page">María Fernanda Rondón</span>
+      </nav>
+
+      <div class="page-grid grid">
+        <div class="page-main min-w-0">
+          <section class="profile-cover">
+            <img src="assets/img/campus/perfil-cover.jpg" alt="Estudiantes y docentes de la UNELLEZ durante una práctica de campo" width="1400" height="520">
+            <p class="cover-caption cover-caption--right">Práctica de campo, UNELLEZ · Angonfer / Wikimedia Commons (CC BY-SA 4.0)</p>
+          </section>
+
+          <header class="profile-head">
+            <img class="profile-avatar" src="assets/img/avatares/w33.jpg" alt="Foto de perfil de María Fernanda Rondón" width="104" height="104">
+            <div class="profile-id">
+              <h1 class="profile-name">María Fernanda Rondón</h1>
+              <p class="profile-handle">@mf.rondon · Barinas, Venezuela</p>
+              <div class="profile-badges">
+                <span class="badge badge-mod">Moderadora</span>
+                <span class="badge">Veterana</span>
+                <span class="badge">Mentora</span>
+              </div>
+            </div>
+            <div class="profile-actions">
+              <button class="btn btn-outline btn-sm" type="button" data-demo-action="La edición de perfil se conectará a procesar.php en la versión PHP.">Editar perfil</button>
+              <button class="btn btn-ghost btn-sm" type="button" data-share>Compartir</button>
+            </div>
+          </header>
+
+          <p class="profile-bio">Estudiante de Ingeniería de Sistemas, 8.º semestre. Trabajo en el laboratorio de redes y coordino el club de robótica. Me interesa la accesibilidad web y cómo se enseña programación sin miedo. También voy a las jornadas de siembra del Jardín Botánico cuando el horario lo permite.</p>
+
+          <div class="profile-meta">
+            <span class="meta-item">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2.5 5.5 8 2l5.5 3.5v8h-11z"/><path d="M6 13.5v-4h4v4"/></svg>
+              Ingeniería de Sistemas · 8.º semestre
+            </span>
+            <span class="meta-item">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M8 14s4.5-4.2 4.5-7.5a4.5 4.5 0 1 0-9 0C3.5 9.8 8 14 8 14Z"/><circle cx="8" cy="6.5" r="1.5"/></svg>
+              Núcleo Barinas
+            </span>
+            <span class="meta-item">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="2.5" y="3.5" width="11" height="10" rx="1"/><path d="M2.5 6.5h11M5.5 2v3M10.5 2v3"/></svg>
+              Se unió en marzo de 2023
+            </span>
+            <span class="meta-item"><span class="online-dot" aria-hidden="true"></span>Activa hace 12 min</span>
+          </div>
+
+          <div class="profile-stats grid">
+            <div class="profile-stat"><b>148</b><span>Mensajes</span></div>
+            <div class="profile-stat"><b>1.284</b><span>Karma</span></div>
+            <div class="profile-stat"><b>37</b><span>Hilos</span></div>
+            <div class="profile-stat"><b>111</b><span>Respuestas</span></div>
+          </div>
+
+          <div class="profile-tabs" data-tabs role="tablist" aria-label="Contenido del perfil">
+            <button class="profile-tab is-active" id="tab-actividad" type="button" role="tab" aria-selected="true" aria-controls="panel-actividad" data-tab="actividad" tabindex="0">Actividad</button>
+            <button class="profile-tab" id="tab-hilos" type="button" role="tab" aria-selected="false" aria-controls="panel-hilos" data-tab="hilos" tabindex="-1">Hilos <span>37</span></button>
+            <button class="profile-tab" id="tab-respuestas" type="button" role="tab" aria-selected="false" aria-controls="panel-respuestas" data-tab="respuestas" tabindex="-1">Respuestas <span>111</span></button>
+          </div>
+
+          <div class="tab-panel is-active" id="panel-actividad" role="tabpanel" aria-labelledby="tab-actividad">
+            <div class="activity-list">
+              <article class="activity-item">
+                <span class="activity-type">Respuesta</span>
+                <div>
+                  <h2 class="activity-title"><a href="thread.html">En «Jornada de siembra en el Jardín Botánico: lo que se hizo, lo que falta y la próxima fecha»</a></h2>
+                  <p class="activity-excerpt">Dejo la nota de moderación: el hilo queda fijado hasta el 7 de noviembre. Las coordinaciones de herramientas y transporte van en este mismo hilo.</p>
+                </div>
+                <time class="activity-time" datetime="2026-10-28T10:06:00-04:00">hace 3 min</time>
+              </article>
+
+              <article class="activity-item">
+                <span class="activity-type type-thread">Hilo</span>
+                <div>
+                  <h2 class="activity-title"><a href="thread.html">¿Alguien ha cursado Proyecto Socio-Tecnológico con la prof. Rangel?</a></h2>
+                  <p class="activity-excerpt">Busco experiencias del semestre pasado: carga de trabajo, entregas y si exige trabajo comunitario presencial.</p>
+                </div>
+                <time class="activity-time" datetime="2026-10-28T02:15:00-04:00">hace 8 h</time>
+              </article>
+
+              <article class="activity-item">
+                <span class="activity-type">Respuesta</span>
+                <div>
+                  <h2 class="activity-title"><a href="thread.html">En «El wifi del edificio de Ciencias Sociales, otra vez»</a></h2>
+                  <p class="activity-excerpt">No es el router: el switch del piso 2 lleva semanas saturado. Si pueden, conecten el repetidor al puerto 4 y no al 1.</p>
+                </div>
+                <time class="activity-time" datetime="2026-10-27T18:20:00-04:00">ayer</time>
+              </article>
+
+              <article class="activity-item">
+                <span class="activity-type type-thread">Hilo</span>
+                <div>
+                  <h2 class="activity-title"><a href="thread.html">Guía: cómo documentar el proyecto comunitario sin perder el semestre</a></h2>
+                  <p class="activity-excerpt">Plantilla de actas, evidencias y cronograma que usamos en Proyectos. Incluye los errores que nos costaron una semana.</p>
+                </div>
+                <time class="activity-time" datetime="2026-10-26T16:05:00-04:00">26 oct</time>
+              </article>
+
+              <article class="activity-item">
+                <span class="activity-type">Respuesta</span>
+                <div>
+                  <h2 class="activity-title"><a href="thread.html">En «Buscamos dos personas para el equipo de robótica (competencia nacional, noviembre)»</a></h2>
+                  <p class="activity-excerpt">Me sumo para la parte de documentación y pruebas. Puedo los martes y jueves después de las 4:00 en el laboratorio 3.</p>
+                </div>
+                <time class="activity-time" datetime="2026-10-24T14:12:00-04:00">24 oct</time>
+              </article>
+            </div>
+          </div>
+
+          <div class="tab-panel" id="panel-hilos" role="tabpanel" aria-labelledby="tab-hilos" hidden>
+            <div class="profile-thread-list">
+              <article class="profile-thread-row">
+                <div>
+                  <h3><a href="thread.html">¿Alguien ha cursado Proyecto Socio-Tecnológico con la prof. Rangel?</a></h3>
+                  <p class="profile-thread-meta">Académico · 28 oct 2026 · Ingeniería de Sistemas</p>
+                </div>
+                <div class="profile-thread-nums">
+                  <div><b>17</b><span>Resp.</span></div>
+                  <div><b>9</b><span>Votos</span></div>
+                </div>
+              </article>
+
+              <article class="profile-thread-row">
+                <div>
+                  <h3><a href="thread.html">Guía: cómo documentar el proyecto comunitario sin perder el semestre</a></h3>
+                  <p class="profile-thread-meta">Recursos · 26 oct 2026 · Académico</p>
+                </div>
+                <div class="profile-thread-nums">
+                  <div><b>24</b><span>Resp.</span></div>
+                  <div><b>58</b><span>Votos</span></div>
+                </div>
+              </article>
+
+              <article class="profile-thread-row">
+                <div>
+                  <h3><a href="thread.html">Plantilla para informes de laboratorio (IEEE, en español)</a></h3>
+                  <p class="profile-thread-meta">Recursos · 18 oct 2026 · Ingeniería</p>
+                </div>
+                <div class="profile-thread-nums">
+                  <div><b>11</b><span>Resp.</span></div>
+                  <div><b>33</b><span>Votos</span></div>
+                </div>
+              </article>
+
+              <article class="profile-thread-row">
+                <div>
+                  <h3><a href="thread.html">¿Cómo piden los profes la documentación del proyecto comunitario?</a></h3>
+                  <p class="profile-thread-meta">Académico · 12 oct 2026 · Núcleo Barinas</p>
+                </div>
+                <div class="profile-thread-nums">
+                  <div><b>19</b><span>Resp.</span></div>
+                  <div><b>21</b><span>Votos</span></div>
+                </div>
+              </article>
+
+              <article class="profile-thread-row">
+                <div>
+                  <h3><a href="thread.html">Dudas sobre la electiva de Redes II</a></h3>
+                  <p class="profile-thread-meta">Académico · 5 oct 2026 · Ingeniería de Sistemas</p>
+                </div>
+                <div class="profile-thread-nums">
+                  <div><b>8</b><span>Resp.</span></div>
+                  <div><b>12</b><span>Votos</span></div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="tab-panel" id="panel-respuestas" role="tabpanel" aria-labelledby="tab-respuestas" hidden>
+            <div class="reply-list">
+              <article class="reply-item">
+                <p class="reply-context">En <a href="thread.html">Jornada de siembra en el Jardín Botánico</a> · hace 3 min</p>
+                <p class="reply-body">Dejo la nota de moderación: el hilo queda fijado hasta el 7 de noviembre. Las coordinaciones de herramientas y transporte van en este mismo hilo; no abran uno nuevo.</p>
+                <p class="reply-foot"><span>22 votos</span><span>0 respuestas</span></p>
+              </article>
+
+              <article class="reply-item">
+                <p class="reply-context">En <a href="thread.html">El wifi del edificio de Ciencias Sociales, otra vez</a> · ayer</p>
+                <p class="reply-body">No es el router: el switch del piso 2 lleva semanas saturado. Si pueden, conecten el repetidor al puerto 4 y no al 1; ese puerto está reservado para el laboratorio.</p>
+                <p class="reply-foot"><span>12 votos</span><span>3 respuestas</span></p>
+              </article>
+
+              <article class="reply-item">
+                <p class="reply-context">En <a href="thread.html">Buscamos dos personas para el equipo de robótica</a> · 24 oct</p>
+                <p class="reply-body">Me sumo para la parte de documentación y pruebas. Puedo los martes y jueves después de las 4:00 en el laboratorio 3. Si la competencia es el 21, alcanzamos a hacer dos iteraciones.</p>
+                <p class="reply-foot"><span>9 votos</span><span>1 respuesta</span></p>
+              </article>
+
+              <article class="reply-item">
+                <p class="reply-context">En <a href="thread.html">Cómo estructurar el marco metodológico cuando el tutor no responde</a> · 21 oct</p>
+                <p class="reply-body">El tutor no responde, pero la coordinación sí puede firmar la carta de presentación. Pregunten en la oficina de Posgrado antes de rehacer el capítulo completo.</p>
+                <p class="reply-foot"><span>7 votos</span><span>2 respuestas</span></p>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <aside class="page-side" id="sidebar" aria-label="Información del perfil">
+          <div class="sidebar-head">
+            <span>Perfil</span>
+            <button class="sidebar-close" type="button" data-sidebar-close>Cerrar <span aria-hidden="true">×</span></button>
+          </div>
+
+          <section class="side-block">
+            <div class="side-head">
+              <h2>Sobre María</h2>
+            </div>
+            <dl class="about-list">
+              <dt>Carrera</dt><dd>Ingeniería de Sistemas</dd>
+              <dt>Semestre</dt><dd>8.º</dd>
+              <dt>Núcleo</dt><dd>Barinas</dd>
+              <dt>Ingreso</dt><dd>Marzo de 2023</dd>
+              <dt>Última conexión</dt><dd>Hace 12 minutos</dd>
+            </dl>
+          </section>
+
+          <section class="side-block">
+            <div class="side-head">
+              <h2>Insignias</h2>
+            </div>
+            <div class="badge-row"><span class="badge-name is-mod">Moderadora</span><span class="badge-date">desde 2024</span></div>
+            <div class="badge-row"><span class="badge-name">Veterana</span><span class="badge-date">desde 2025</span></div>
+            <div class="badge-row"><span class="badge-name">Mentora</span><span class="badge-date">2026</span></div>
+            <div class="badge-row"><span class="badge-name">1.000+ karma</span><span class="badge-date">2024</span></div>
+          </section>
+
+          <section class="side-block">
+            <div class="side-head">
+              <h2>Modera</h2>
+              <a href="index.html#comunidades">Ver todas</a>
+            </div>
+            <ul class="community-list">
+              <li><a href="index.html#lista-hilos"><span class="cmono" aria-hidden="true">AC</span><span>Académico</span><span class="ccount">121</span></a></li>
+              <li><a href="index.html#lista-hilos"><span class="cmono" aria-hidden="true">PR</span><span>Proyectos</span><span class="ccount">87</span></a></li>
+              <li><a href="index.html#lista-hilos"><span class="cmono" aria-hidden="true">RE</span><span>Recursos</span><span class="ccount">64</span></a></li>
+            </ul>
+          </section>
+
+          <section class="side-block">
+            <div class="side-head">
+              <h2>En el foro</h2>
+            </div>
+            <dl class="thread-facts">
+              <dt>Miembro desde</dt><dd>mar 2023</dd>
+              <dt>Mensajes</dt><dd>148</dd>
+              <dt>Última actividad</dt><dd>hace 3 min</dd>
+              <dt>Perfil público</dt><dd>Sí</dd>
+            </dl>
+          </section>
+
+          <div class="side-seal">
+            <img src="assets/logo/logo-mark.png" alt="Marca UNELLEZ" width="27" height="29">
+            <p><span class="seal-label">Sello institucional</span>Universidad Nacional Experimental de los Llanos Occidentales “Ezequiel Zamora”.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-seal">
+      <img class="footer-logo" src="assets/logo/logo.png" alt="UNELLEZ" width="66" height="86">
+      <div>
+        <p class="footer-kicker">Sello institucional · UNELLEZ</p>
+        <p class="footer-credit">Desarrollado por ingenieros de la <strong>Universidad Nacional Experimental de los Llanos Occidentales “Ezequiel Zamora”</strong> (UNELLEZ).</p>
+      </div>
+      <a class="footer-link-out" href="https://unellez.edu.ve/" target="_blank" rel="noopener">
+        unellez.edu.ve
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M4 2h6v6M10 2 3 9"/></svg>
+      </a>
+    </div>
+
+    <div class="shell footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <img class="brand-mark" src="assets/logo/logo-mark.png" alt="" width="26" height="28">
+          <span class="brand-text">
+            <span class="brand-name">Foro <b>UNELLEZ</b></span>
+            <span class="brand-sub">Comunidad de discusión</span>
+          </span>
+        </a>
+        <p>Un espacio para preguntar, avisar y discutir entre estudiantes, docentes y egresados de los núcleos Barinas, Guanare y San Carlos.</p>
+        <p class="footer-note">Prototipo frontend · datos de demostración<br><a href="CREDITOS.md">Créditos de imágenes</a></p>
+      </div>
+      <div class="footer-col">
+        <h2>Comunidades</h2>
+        <a href="index.html#lista-hilos">Ingeniería</a>
+        <a href="index.html#lista-hilos">Agronomía</a>
+        <a href="index.html#lista-hilos">Académico</a>
+        <a href="index.html#lista-hilos">Vida en el campus</a>
+      </div>
+      <div class="footer-col">
+        <h2>El foro</h2>
+        <a href="index.html">Hilos recientes</a>
+        <a href="index.html#comunidades">Comunidades</a>
+        <a href="index.html#reglas">Normas</a>
+        <a href="nuevo-hilo.html">Publicar</a>
+      </div>
+      <div class="footer-col">
+        <h2>Núcleos</h2>
+        <span>Barinas</span>
+        <span>Guanare</span>
+        <span>San Carlos</span>
+        <a href="login.html">Cómo participar</a>
+      </div>
+    </div>
+
+    <div class="shell footer-base">
+      <p>© 2026 Foro UNELLEZ. Contenido de la comunidad universitaria.</p>
+      <div class="footer-base-links">
+        <a href="index.html#reglas">Normas</a>
+        <a href="login.html">Acceso</a>
+        <a href="mailto:moderacion@unellez.edu.ve">Contacto</a>
+      </div>
+      <p>Hecho en Barinas, Venezuela.</p>
+    </div>
+  </footer>
+
+  <div class="toast" data-toast role="status" aria-live="polite"></div>
+  <script src="assets/js/foro.js" defer></script>
+</body>
+</html>

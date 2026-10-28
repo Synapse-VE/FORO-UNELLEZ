@@ -1,0 +1,5 @@
+/* Entrada de Tailwind. Genera assets/css/tailwind.css:
+   npx tailwindcss -c tailwind.config.js -i assets/css/tailwind-input.css -o assets/css/tailwind.css --minify */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

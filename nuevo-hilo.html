@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nuevo hilo — Foro UNELLEZ</title>
+  <meta name="description" content="Publica un hilo en el Foro UNELLEZ. Elige la comunidad, escribe un título claro y aporta contexto.">
+  <meta name="theme-color" content="#EE7D16">
+  <link rel="icon" href="assets/logo/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tailwind.css">
+  <link rel="stylesheet" href="assets/css/foro.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <div class="top-rule" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="shell mx-auto w-full header-inner flex items-center">
+      <a class="brand" href="index.html" aria-label="Foro UNELLEZ, ir al inicio">
+        <img class="brand-mark" src="assets/logo/logo-mark.png" alt="" width="30" height="32">
+        <span class="brand-text">
+          <span class="brand-name">Foro <b>UNELLEZ</b></span>
+          <span class="brand-sub">Comunidad de discusión</span>
+        </span>
+      </a>
+
+      <nav class="header-nav" aria-label="Navegación principal">
+        <a href="index.html">Hilos</a>
+        <a href="index.html#comunidades">Comunidades</a>
+        <a href="index.html#reglas">Normas</a>
+        <a class="is-active" href="nuevo-hilo.html" aria-current="page">Publicar</a>
+      </nav>
+
+      <form class="header-search" role="search" action="buscar.php" method="get">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="8.6" cy="8.6" r="5.1"/><path d="m12.4 12.4 4.4 4.4"/></svg>
+        <label class="sr-only" for="buscar">Buscar en el foro</label>
+        <input id="buscar" name="q" type="search" placeholder="Buscar hilos, comunidades, personas…" autocomplete="off" enterkeyhint="search">
+        <kbd aria-hidden="true">/</kbd>
+      </form>
+
+      <div class="header-actions flex items-center">
+        <a class="btn btn-primary btn-new" href="nuevo-hilo.html" aria-current="page">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M8 2.5v11M2.5 8h11"/></svg>
+          <span>Nuevo hilo</span>
+        </a>
+
+        <div class="user-menu" data-user-menu>
+          <button class="user-trigger" type="button" data-user-trigger aria-expanded="false" aria-controls="menu-usuario">
+            <img class="avatar" src="assets/img/avatares/w33.jpg" alt="" width="28" height="28">
+            <span class="user-name">María</span>
+            <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m3 4.5 3 3 3-3"/></svg>
+            <span class="sr-only">Abrir menú de cuenta</span>
+          </button>
+          <div class="user-panel" id="menu-usuario" hidden>
+            <div class="user-panel-head">
+              <img src="assets/img/avatares/w33.jpg" alt="" width="34" height="34">
+              <div>
+                <strong>María Fernanda Rondón</strong>
+                <span>@mf.rondon · karma 1.284</span>
+              </div>
+            </div>
+            <div class="user-panel-links">
+              <a href="profile.html">Mi perfil <span>↗</span></a>
+              <a href="profile.html#hilos">Mis hilos <span>37</span></a>
+              <a href="profile.html#respuestas">Mis respuestas <span>111</span></a>
+              <a href="nuevo-hilo.html">Nuevo hilo <span>+</span></a>
+            </div>
+            <div class="user-panel-out">
+              <form action="procesar.php" method="post" data-demo>
+                <input type="hidden" name="accion" value="cerrar_sesion">
+                <input type="hidden" name="csrf_token" value="demo-csrf-unellez">
+                <button type="submit">
+                  <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M6 3H3.5v10H6M10 5l3 3-3 3M13 8H6"/></svg>
+                  Cerrar sesión
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <button class="icon-btn sidebar-toggle" type="button" data-sidebar-open aria-controls="sidebar" aria-expanded="false" aria-label="Abrir guía de publicación">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="drawer-overlay" data-sidebar-overlay hidden></div>
+
+  <main id="contenido">
+    <div class="shell mx-auto w-full">
+      <nav class="breadcrumb" aria-label="Migas de pan">
+        <a href="index.html">Hilos</a><span class="crumb-sep">/</span>
+        <span aria-current="page">Nuevo hilo</span>
+      </nav>
+
+      <div class="page-grid grid">
+        <div class="page-main min-w-0">
+          <header class="compose-head">
+            <p class="eyebrow">Publicar en la comunidad</p>
+            <h1>Nuevo hilo</h1>
+            <p>Elige bien la comunidad, escribe un título que se entienda sin abrir el hilo y aporta el contexto que le falta a quien va a responder. El borrador se guarda en este navegador.</p>
+          </header>
+
+          <!-- data-demo: quitar al conectar procesar.php -->
+          <form class="compose-form" action="procesar.php" method="post" data-validate="nuevo-hilo" data-demo data-draft-form novalidate>
+            <input type="hidden" name="accion" value="crear_hilo">
+            <input type="hidden" name="csrf_token" value="demo-csrf-unellez">
+            <div class="form-error-summary" data-error-summary role="alert"></div>
+
+            <section class="form-section">
+              <div class="form-section-head">
+                <h2>01 · Comunidad</h2>
+                <a href="index.html#comunidades">Ver todas</a>
+              </div>
+              <label class="form-label" for="comunidad">¿Dónde va este hilo?</label>
+              <select class="select" id="comunidad" name="comunidad" aria-describedby="hint-comunidad error-comunidad">
+                <option value="">Elige una comunidad</option>
+                <option value="academico">Académico — materias, profesores, horarios</option>
+                <option value="ingenieria">Ingeniería — talleres, laboratorios, proyectos técnicos</option>
+                <option value="agronomia">Agronomía — campo, cultivos, veterinaria</option>
+                <option value="posgrado">Posgrado — tesis, maestrías, doctorados</option>
+                <option value="tramites">Trámites — constancias, inscripciones, pagos</option>
+                <option value="campus">Vida en el campus — seguridad, transporte, wifi</option>
+                <option value="proyectos">Proyectos — convocatorias y equipos</option>
+                <option value="deportes">Deportes — inter-núcleos y actividades</option>
+              </select>
+              <p class="field-hint" id="hint-comunidad">Si dudas, Académico es el lugar por defecto. No publiques el mismo tema en dos comunidades.</p>
+              <p class="field-error" id="error-comunidad" data-error-for="comunidad"></p>
+            </section>
+
+            <section class="form-section">
+              <div class="form-section-head">
+                <h2>02 · Título</h2>
+                <span>Máximo 120 caracteres</span>
+              </div>
+              <label class="form-label" for="titulo">Título del hilo</label>
+              <input class="input title-input" id="titulo" name="titulo" type="text" maxlength="120" autocomplete="off" placeholder="Ej.: Repuestos para la fuente de soldadura del taller" aria-describedby="hint-titulo error-titulo">
+              <div class="field-meta">
+                <span id="hint-titulo">Describe el problema, no tu urgencia. Sin “ayuda” ni mayúsculas sostenidas.</span>
+                <span class="counter" data-counter-for="titulo">0 / 120</span>
+              </div>
+              <p class="field-error" id="error-titulo" data-error-for="titulo"></p>
+            </section>
+
+            <section class="form-section">
+              <div class="form-section-head">
+                <h2>03 · Contenido</h2>
+                <span>Mínimo 40 caracteres</span>
+              </div>
+              <div class="body-editor" data-editor>
+                <div class="composer-toolbar">
+                  <button class="md-btn" type="button" data-md="bold" title="Negrita" aria-label="Negrita"><strong>B</strong></button>
+                  <button class="md-btn" type="button" data-md="italic" title="Cursiva" aria-label="Cursiva"><em>I</em></button>
+                  <span class="md-sep" aria-hidden="true"></span>
+                  <button class="md-btn" type="button" data-md="quote" title="Cita" aria-label="Cita">”</button>
+                  <button class="md-btn" type="button" data-md="code" title="Código" aria-label="Código">&lt;/&gt;</button>
+                  <button class="md-btn" type="button" data-md="link" title="Enlace" aria-label="Enlace">↗</button>
+                  <button class="md-btn" type="button" data-md="list" title="Lista" aria-label="Lista">≡</button>
+                  <div class="editor-tabs">
+                    <button class="editor-tab is-active" type="button" data-editor-tab="write">Escribir</button>
+                    <button class="editor-tab" type="button" data-editor-tab="preview">Vista previa</button>
+                  </div>
+                </div>
+                <label class="sr-only" for="cuerpo-hilo">Contenido del hilo</label>
+                <textarea id="cuerpo-hilo" name="contenido" rows="9" required minlength="40" placeholder="Qué pasó, qué ya intentaste, a quién le preguntaste y qué necesitas. Si adjuntas una foto, explica dónde se tomó."></textarea>
+                <div class="composer-preview" aria-live="polite"></div>
+              </div>
+              <div class="field-meta">
+                <span>No incluyas teléfonos, cédulas ni capturas privadas.</span>
+                <span class="composer-counter" data-counter-for="contenido" data-count-mode="words">0 palabras</span>
+              </div>
+              <p class="field-error" id="error-contenido" data-error-for="contenido"></p>
+            </section>
+
+            <section class="form-section">
+              <div class="form-section-head">
+                <h2>04 · Etiquetas</h2>
+                <span>Opcional</span>
+              </div>
+              <label class="form-label" for="etiquetas">Etiquetas <span class="label-optional">máximo 3, separadas por coma</span></label>
+              <input class="input" id="etiquetas" name="etiquetas" type="text" maxlength="100" autocomplete="off" placeholder="laboratorios, horarios, barinas" aria-describedby="hint-etiquetas error-etiquetas">
+              <p class="field-hint" id="hint-etiquetas">Sirven para que otros encuentren el hilo. Usa palabras que ya existan en el foro.</p>
+              <p class="field-error" id="error-etiquetas" data-error-for="etiquetas"></p>
+            </section>
+
+            <section class="form-section">
+              <div class="checkbox-row checkbox-row--spaced">
+                <input id="acepta_normas" name="acepta_normas" type="checkbox" value="1" aria-describedby="error-acepta_normas">
+                <label for="acepta_normas">Acepto las <a href="index.html#reglas">normas del foro</a>. Entiendo que la moderación puede mover o cerrar el hilo si no corresponde a la comunidad.</label>
+              </div>
+              <p class="field-error checkbox-error" id="error-acepta_normas" data-error-for="acepta_normas"></p>
+
+              <div class="form-actions flex flex-wrap items-center">
+                <button class="btn btn-primary btn-lg" type="submit">Publicar hilo</button>
+                <button class="btn btn-outline btn-lg" type="button" data-draft-save>Guardar borrador</button>
+                <a class="btn btn-ghost btn-lg" href="index.html">Cancelar</a>
+                <span class="draft-status"><span class="online-dot" aria-hidden="true"></span> Los cambios se guardan en este navegador</span>
+              </div>
+            </section>
+          </form>
+        </div>
+
+        <aside class="page-side compose-side" id="sidebar" aria-label="Guía para publicar">
+          <div class="sidebar-head">
+            <span>Antes de publicar</span>
+            <button class="sidebar-close" type="button" data-sidebar-close>Cerrar <span aria-hidden="true">×</span></button>
+          </div>
+
+          <section class="side-block">
+            <div class="side-head">
+              <h2>Antes de publicar</h2>
+            </div>
+            <ul class="check-list">
+              <li>Busca si el tema ya está abierto. Si existe, responde ahí.</li>
+              <li>El título describe el problema; no escribas “urgente” ni todo en mayúsculas.</li>
+              <li>Di qué curso, núcleo y a quién le preguntaste.</li>
+              <li>Sube fotos propias o con permiso de quien aparece.</li>
+              <li>No incluyas teléfonos, cédulas ni capturas de conversaciones privadas.</li>
+            </ul>
+          </section>
+
+          <section class="side-block">
+            <div class="side-head">
+              <h2>Dónde va cada cosa</h2>
+            </div>
+            <ul class="where-list">
+              <li><span class="cmono" aria-hidden="true">AC</span><div><b>Académico</b>Materias, profesores, horarios y evaluaciones.</div></li>
+              <li><span class="cmono" aria-hidden="true">IN</span><div><b>Ingeniería</b>Talleres, laboratorios y proyectos técnicos.</div></li>
+              <li><span class="cmono" aria-hidden="true">AG</span><div><b>Agronomía</b>Campo, cultivos, veterinaria y jardín botánico.</div></li>
+              <li><span class="cmono" aria-hidden="true">TR</span><div><b>Trámites</b>Constancias, inscripciones, pagos y control de estudios.</div></li>
+              <li><span class="cmono" aria-hidden="true">VC</span><div><b>Vida en el campus</b>Seguridad, transporte, wifi y espacios comunes.</div></li>
+            </ul>
+          </section>
+
+          <section class="side-block">
+            <div class="side-head">
+              <h2>Reglas de publicación</h2>
+              <a href="index.html#reglas">Completas</a>
+            </div>
+            <ol class="rules-list">
+              <li><span class="rule-num">01</span><span>Un tema por hilo. Los mensajes duplicados se cierran.</span></li>
+              <li><span class="rule-num">02</span><span>Las ventas y las convocatorias van en Proyectos o Compra y venta.</span></li>
+              <li><span class="rule-num">03</span><span>La política partidista y los ataques personales no tienen espacio aquí.</span></li>
+            </ol>
+          </section>
+
+          <div class="side-seal">
+            <img src="assets/logo/logo-mark.png" alt="Marca UNELLEZ" width="27" height="29">
+            <p><span class="seal-label">Sello institucional</span>Universidad Nacional Experimental de los Llanos Occidentales “Ezequiel Zamora”.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-seal">
+      <img class="footer-logo" src="assets/logo/logo.png" alt="UNELLEZ" width="66" height="86">
+      <div>
+        <p class="footer-kicker">Sello institucional · UNELLEZ</p>
+        <p class="footer-credit">Desarrollado por ingenieros de la <strong>Universidad Nacional Experimental de los Llanos Occidentales “Ezequiel Zamora”</strong> (UNELLEZ).</p>
+      </div>
+      <a class="footer-link-out" href="https://unellez.edu.ve/" target="_blank" rel="noopener">
+        unellez.edu.ve
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M4 2h6v6M10 2 3 9"/></svg>
+      </a>
+    </div>
+
+    <div class="shell footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <img class="brand-mark" src="assets/logo/logo-mark.png" alt="" width="26" height="28">
+          <span class="brand-text">
+            <span class="brand-name">Foro <b>UNELLEZ</b></span>
+            <span class="brand-sub">Comunidad de discusión</span>
+          </span>
+        </a>
+        <p>Un espacio para preguntar, avisar y discutir entre estudiantes, docentes y egresados de los núcleos Barinas, Guanare y San Carlos.</p>
+        <p class="footer-note">Prototipo frontend · datos de demostración<br><a href="CREDITOS.md">Créditos de imágenes</a></p>
+      </div>
+      <div class="footer-col">
+        <h2>Comunidades</h2>
+        <a href="index.html#lista-hilos">Ingeniería</a>
+        <a href="index.html#lista-hilos">Agronomía</a>
+        <a href="index.html#lista-hilos">Académico</a>
+        <a href="index.html#lista-hilos">Vida en el campus</a>
+      </div>
+      <div class="footer-col">
+        <h2>El foro</h2>
+        <a href="index.html">Hilos recientes</a>
+        <a href="index.html#comunidades">Comunidades</a>
+        <a href="index.html#reglas">Normas</a>
+        <a href="nuevo-hilo.html">Publicar</a>
+      </div>
+      <div class="footer-col">
+        <h2>Núcleos</h2>
+        <span>Barinas</span>
+        <span>Guanare</span>
+        <span>San Carlos</span>
+        <a href="login.html">Cómo participar</a>
+      </div>
+    </div>
+
+    <div class="shell footer-base">
+      <p>© 2026 Foro UNELLEZ. Contenido de la comunidad universitaria.</p>
+      <div class="footer-base-links">
+        <a href="index.html#reglas">Normas</a>
+        <a href="login.html">Acceso</a>
+        <a href="mailto:moderacion@unellez.edu.ve">Contacto</a>
+      </div>
+      <p>Hecho en Barinas, Venezuela.</p>
+    </div>
+  </footer>
+
+  <div class="toast" data-toast role="status" aria-live="polite"></div>
+  <script src="assets/js/foro.js" defer></script>
+</body>
+</html>
